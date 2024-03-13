@@ -20,11 +20,11 @@ use App\Http\Controllers\AuthController;
 //Ruta privadas hacia el administrador 
 Route::middleware(['onlyadmin'])->group(function () {
     Route::controller(AuthAdminController::class)->group(function () {
-        Route::post('logoutt', 'logout');
-        Route::get('profileagr', 'userProfileInfo');
-        Route::put('updateinfoo', 'updateUser');
-        Route::post('refreshh', 'refresh');
+        Route::post('logoutadmin', 'logoutAdmin');
+        Route::get('profileadmin', 'userProfileAdmin');
+        Route::put('updateinfoadmin', 'updateAdmin');
     });
+    
     
 
 });
@@ -32,10 +32,9 @@ Route::middleware(['onlyadmin'])->group(function () {
 //Ruta privadas hacia el gerente
 Route::middleware(['onlygerente'])->group(function () {
     Route::controller(AuthGerenteController::class)->group(function () {
-        Route::post('logoutt', 'logout');
-        Route::get('profileagr', 'userProfileInfo');
-        Route::put('updateinfoo', 'updateUser');
-        Route::post('refreshh', 'refresh');
+        Route::post('logoutgerente', 'logoutGerente');
+        Route::get('profilegerente', 'userProfileGerente');
+        Route::put('updateinfogerente', 'updateGerente');
     });
     
 
@@ -43,10 +42,9 @@ Route::middleware(['onlygerente'])->group(function () {
 //Ruta privadas hacia finanzas 
 Route::middleware(['onlyfinanzas'])->group(function () {
     Route::controller(AuthFinanzasController::class)->group(function () {
-        Route::post('logoutt', 'logout');
-        Route::get('profileagr', 'userProfileInfo');
-        Route::put('updateinfoo', 'updateUser');
-        Route::post('refreshh', 'refresh');
+        Route::post('logoutfinanzas', 'logoutFinanzas');
+        Route::get('profilefinanzas', 'userProfileFinanzas');
+        Route::put('updateinfofinanzas', 'updateFinanzas');
     });
     
 

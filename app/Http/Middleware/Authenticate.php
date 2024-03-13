@@ -27,7 +27,7 @@ class Authenticate extends Middleware
         try {
             $this->authenticate($request, $guards);
         } catch (AuthenticationException $e) {
-            return response(['message' => 'No authenticated babe'], 401);
+            return response(['message' => 'Necesitas iniciar sesion'], 401);
         }
 
         return $next($request);

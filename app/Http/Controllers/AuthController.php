@@ -23,36 +23,18 @@ class AuthController extends Controller
     }
 
 
-    public function updateUser(Request $request)
+   
+
+    public function login(Request $request)
     {
-        if (!Auth::check()) {
-            return response()->json(['error' => 'No access'], 401);
-        }
-
-        $user = Auth::user();
-
         $validator = Validator::make($request->all(), [
-            'email' => 'required|string|max:8',
-            // 'email' => 'required|string|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8' // The password is optional
+            'email' => 'required',
+            'password' => 'required',
         ]);
-
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $user->update([
-            'email' => $request->email,
-            'id' => $user->id, // Assign the user id automatically
-            'password' => $request->password ? bcrypt($request->password) : $user->password // Actualiza la contraseña solo si se proporciona
-        ]);
-
-        return response()->json(['user' => $user], 200);
-    }
-
-
-    public function login(Request $request)
-    {
         $credentials = $request->only('email', 'password');
 
         if (!JWTAuth::attempt($credentials)) {
@@ -71,20 +53,9 @@ class AuthController extends Controller
     }
 
 
-    public function userProfileInfo()
-    {
-        return Auth::user();
-    }
 
     //Decido usar esta funcion mejor
-    public function logout()
-    {
-        return response([
-            'message' => 'Successfully logged out!'
-        ])->cookie('jwt', null, -1);
-    }
-
-
+    
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
