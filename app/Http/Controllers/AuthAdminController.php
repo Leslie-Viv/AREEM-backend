@@ -64,6 +64,8 @@ class AuthAdminController extends Controller
         return response()->json(['user' => $user], 200);
     }
 
+    //**'rol_id'= this. */
+
 
 
     //

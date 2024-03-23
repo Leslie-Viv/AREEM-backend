@@ -6,6 +6,9 @@ use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\AuthGerenteController;
 use App\Http\Controllers\AuthFinanzasController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\IngresoController;
+use Illuminate\Support\Facades\DB;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +26,16 @@ Route::middleware(['onlyadmin'])->group(function () {
         Route::post('logoutadmin', 'logoutAdmin');
         Route::get('profileadmin', 'userProfileAdmin');
         Route::put('updateinfoadmin', 'updateAdmin');
+
+    });
+    Route::controller(IngresoController::class)->group(function () {
+        Route::post('nuevoingreso', 'create');
+        Route::get('veringreso', 'veringreso');
+        Route::patch('actualizaringreso/{id}', 'update');
+        // Route::post('archivaringreso/{id}', 'archivar');
+
+        Route::post('/ingresos/{id}/archivar', 'IngresoController@archivar')->name('ingresos.archivar');
+        
     });
     
     
