@@ -42,6 +42,8 @@ class AuthAdminController extends Controller
         $user = Auth::user();
 
         $validator = Validator::make($request->all(), [
+            'nombreempresa' => 'required|string',
+            'nombrecompleto' => 'required|string',
             'email' => 'required|string',
             // 'email' => 'required|string|email|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8' // The password is optional
@@ -52,6 +54,8 @@ class AuthAdminController extends Controller
         }
 
         $user->update([
+            'nombreempresa' => $request->nombreempresa,
+            'nombrecompleto' => $request->nombrecompleto,
             'email' => $request->email,
             'id' => $user->id, // Assign the user id automatically
             'password' => $request->password ? bcrypt($request->password) : $user->password // Actualiza la contraseña solo si se proporciona
