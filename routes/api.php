@@ -7,6 +7,9 @@ use App\Http\Controllers\AuthGerenteController;
 use App\Http\Controllers\AuthFinanzasController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IngresoController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\UnidadNegocioController;
+use App\Http\Controllers\EmpresaController;
 use Illuminate\Support\Facades\DB;
 
 
@@ -27,6 +30,7 @@ Route::middleware(['onlyadmin'])->group(function () {
         Route::get('profileadmin', 'userProfileAdmin');
         Route::put('updateinfoadmin', 'updateAdmin');
 
+
     });
     Route::controller(IngresoController::class)->group(function () {
         Route::post('nuevoingreso', 'create');
@@ -37,6 +41,36 @@ Route::middleware(['onlyadmin'])->group(function () {
         Route::post('/ingresos/{id}/archivar', 'IngresoController@archivar')->name('ingresos.archivar');
         
     });
+
+    Route::controller(ProductoController::class)->group(function () {
+        Route::post('nuevoproducto', 'crearproducto');
+        Route::get('verproducto', 'verproducto');
+        Route::patch('actualizarproducto/{id}', 'editarproducto');
+        
+    });
+
+    Route::controller(UnidadNegocioController::class)->group(function () {
+        Route::post('nuevaunidad', 'crearunidad');
+        Route::get('verunidad', 'verunidad');
+        Route::patch('actualizarunidad/{id}', 'editarunidad');
+        
+    });
+    Route::controller(EmpresaController::class)->group(function () {
+        Route::post('nuevaempresa', 'crearempresa');
+        Route::get('verempresa', 'verempresa');
+        Route::patch('actualizarempresa/{id}', 'editarempresa');
+        
+    });
+    Route::controller(TipoEgresoController::class)->group(function () {
+        Route::post('nuevotipo', 'creartipo');
+        Route::get('vertipo', 'vertipo');
+        Route::patch('actualizartipo/{id}', 'editartipo');
+        
+    });
+
+
+
+
     
     
 
