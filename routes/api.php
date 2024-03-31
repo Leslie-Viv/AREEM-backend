@@ -10,7 +10,12 @@ use App\Http\Controllers\IngresoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UnidadNegocioController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\TipoEgresoController;
+use App\Http\Controllers\ArchivarIngresoController;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\EgresoController;
+use App\Http\Controllers\ArchivarEgresoController;
+use App\Http\Controllers\OrigenEgresoController;
 
 
 /*
@@ -29,6 +34,9 @@ Route::middleware(['onlyadmin'])->group(function () {
         Route::post('logoutadmin', 'logoutAdmin');
         Route::get('profileadmin', 'userProfileAdmin');
         Route::put('updateinfoadmin', 'updateAdmin');
+        Route::post('nuevousuario', 'createUser');
+        Route::get('verusuarios', 'getAllUsers');
+        Route::patch('actualizarusuario/{id}', 'updateUser');
 
 
     });
@@ -36,16 +44,20 @@ Route::middleware(['onlyadmin'])->group(function () {
         Route::post('nuevoingreso', 'create');
         Route::get('veringreso', 'veringreso');
         Route::patch('actualizaringreso/{id}', 'update');
-        // Route::post('archivaringreso/{id}', 'archivar');
-
-        Route::post('/ingresos/{id}/archivar', 'IngresoController@archivar')->name('ingresos.archivar');
+        Route::post('archivaringreso/{id}', 'archivar');
         
     });
+    Route::controller(ArchivarIngresoController::class)->group(function () {
+            Route::post('recuperaringreso/{id}', 'recuperar');
+        
+    });
+
 
     Route::controller(ProductoController::class)->group(function () {
         Route::post('nuevoproducto', 'crearproducto');
         Route::get('verproducto', 'verproducto');
         Route::patch('actualizarproducto/{id}', 'editarproducto');
+        Route::delete('eliminarproducto/{id}', 'eliminarproducto');
         
     });
 
@@ -68,6 +80,26 @@ Route::middleware(['onlyadmin'])->group(function () {
         
     });
 
+    Route::controller(EgresoController::class)->group(function () {
+        Route::post('nuevoegreso', 'crearegreso');
+        Route::get('veregreso', 'veregreso');
+        Route::patch('actualizaregreso/{id}', 'editaregreso');
+        Route::post('archivaregreso/{id}', 'archivaregreso');
+        
+    });
+    Route::controller(ArchivarEgresoController::class)->group(function () {
+            Route::post('recuperaregreso/{id}', 'recuperaregreso');
+        
+    });
+    Route::controller(OrigenEgresoController::class)->group(function () {
+        Route::post('nuevoorigen', 'crearorigen');
+        Route::get('verorigen', 'verorigen');
+        Route::patch('actualizarorigen/{id}', 'editarorigen');
+        
+    });
+
+    
+
 
 
 
@@ -83,7 +115,17 @@ Route::middleware(['onlygerente'])->group(function () {
         Route::get('profilegerente', 'userProfileGerente');
         Route::put('updateinfogerente', 'updateGerente');
     });
-    
+    Route::controller(IngresoController::class)->group(function () {
+        Route::post('nuevoingreso', 'create');
+        Route::get('veringreso', 'veringreso');        
+    });
+
+    Route::controller(EgresoController::class)->group(function () {
+        Route::post('nuevoegreso', 'crearegreso');
+        Route::get('veregreso', 'veregreso');
+        
+    });
+
 
 });
 //Ruta privadas hacia finanzas 
@@ -92,6 +134,17 @@ Route::middleware(['onlyfinanzas'])->group(function () {
         Route::post('logoutfinanzas', 'logoutFinanzas');
         Route::get('profilefinanzas', 'userProfileFinanzas');
         Route::put('updateinfofinanzas', 'updateFinanzas');
+    });
+
+    Route::controller(IngresoController::class)->group(function () {
+        Route::post('nuevoingreso', 'create');
+        Route::get('veringreso', 'veringreso');        
+    });
+
+    Route::controller(EgresoController::class)->group(function () {
+        Route::post('nuevoegreso', 'crearegreso');
+        Route::get('veregreso', 'veregreso');
+        
     });
     
 

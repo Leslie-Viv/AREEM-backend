@@ -5,16 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class ArchivarIngreso extends Model
+class ArchivarEgreso extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
         'nombrecompleto',
-        'nombreunidad',
+        'nombreempresa',
         'anomesdereporte',
-        'producto',
+        'origenegreso',
+        'tipodecuenta',
+        'tipoegreso',
+        'descripcionegreso',
+        'gasto', 
+        'nombreunidad',
         'fechareal',
         'montototal',
         'user_id'

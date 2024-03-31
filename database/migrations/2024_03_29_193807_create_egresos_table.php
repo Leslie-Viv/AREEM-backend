@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('archivar_ingresos', function (Blueprint $table) {
+        Schema::create('egresos', function (Blueprint $table) {
             $table->id();
             $table->string('nombrecompleto');
-            $table->string('nombreunidad');
+            $table->string('nombreempresa');
             $table->date('anomesdereporte');
-            $table->string('producto');
+            $table->string('origenegreso');
+            $table->string('tipodecuenta');
+            $table->string('tipoegreso');
+            $table->string('descripcionegreso');
+            $table->string('gasto');
+            $table->string('nombreunidad');
             $table->date('fechareal');
             $table->string('montototal');
             $table->unsignedBigInteger('user_id');
@@ -30,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('archivar_ingresos');
+        Schema::dropIfExists('egresos');
     }
 };

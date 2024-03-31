@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Ingreso;
-use App\Models\ArchivarIngreso;
+use App\Models\Ingreso;//modelo que se va a eliminar 
+use App\Models\ArchivarIngreso;//modelo a donde se movera 
 
 class IngresoController extends Controller
 {
@@ -72,5 +72,32 @@ class IngresoController extends Controller
     // }
 
     //
+    
+    public function archivar($id)
+    {
+
+        # Recuperar artículo que se va a eliminar
+        $ingreso = Ingreso::findOrFail($id);
+
+        # Crear nuevo artículo dado de baja/eliminado
+        $archivar_ingresos = new ArchivarIngreso;
+        $archivar_ingresos->nombrecompleto= $ingreso->nombrecompleto;
+        $archivar_ingresos->nombreunidad= $ingreso->nombreunidad;
+        $archivar_ingresos->anomesdereporte= $ingreso->anomesdereporte;
+        $archivar_ingresos->producto= $ingreso->producto;
+        $archivar_ingresos->fechareal= $ingreso->fechareal;
+        $archivar_ingresos->montototal= $ingreso->montototal;
+        $archivar_ingresos->user_id= $ingreso->user_id;
+
+        # Guardar el que se da de baja
+        $archivar_ingresos->save();
+
+        # Eliminar el original
+        $ingreso->delete();
+
+        return response()->json(['message' => 'Ingreso archivado correctamente'], 200);
+        
+    }
+
     
 }
