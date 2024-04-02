@@ -40,4 +40,11 @@ class ArchivarEgresoController extends Controller
         return response()->json(['message' => 'Egreso recuperado correctamente'], 200);
         
     }
+
+     //**Ver archivados*/
+
+     public function getAllArchivadosE () {
+        $archivar_egresos= ArchivarEgreso::all();
+        return response()-> json($archivar_egresos);
+    }
 }

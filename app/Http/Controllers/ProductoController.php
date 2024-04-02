@@ -22,7 +22,7 @@ class ProductoController extends Controller
     //**Crear producto */
     public function crearproducto(Request $request) {
         $validator= Validator::make($request->all(),[
-            'producto'=> 'required | string',
+            'producto'=> 'required | string |min:3|max:30',
         ]);
 
         //**Valida los campos requeridos */

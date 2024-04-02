@@ -20,7 +20,7 @@ class UnidadNegocioController extends Controller
      //**Crear unidad */
      public function crearunidad(Request $request) {
         $validator= Validator::make($request->all(),[
-            'nombreunidad'=> 'required | string',
+            'nombreunidad'=> 'required | string | min:3 | max:30',
         ]);
 
         //**Valida los campos requeridos */

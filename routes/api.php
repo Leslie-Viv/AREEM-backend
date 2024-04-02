@@ -49,14 +49,13 @@ Route::middleware(['onlyadmin'])->group(function () {
         Route::patch('actualizaregreso/{id}', 'editaregreso');
         Route::post('archivaregreso/{id}', 'archivaregreso');
         
-    });
-    Route::controller(ArchivarEgresoController::class)->group(function () {
-            Route::post('recuperaregreso/{id}', 'recuperaregreso');
-        
-    });
-    
+    });    
 
-    
+});
+
+Route::controller(ArchivarEgresoController::class)->group(function () {
+    Route::get('verarchivadose', 'getAllArchivadosE');
+    Route::post('recuperaregreso/{id}', 'recuperaregreso');
 
 });
 
