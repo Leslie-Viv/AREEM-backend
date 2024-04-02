@@ -40,13 +40,7 @@ Route::middleware(['onlyadmin'])->group(function () {
 
 
     });
-    Route::controller(IngresoController::class)->group(function () {
-        Route::post('nuevoingreso', 'create');
-        Route::get('veringreso', 'veringreso');
-        Route::patch('actualizaringreso/{id}', 'update');
-        Route::post('archivaringreso/{id}', 'archivar');
-        
-    });
+    
     Route::controller(ArchivarIngresoController::class)->group(function () {
             Route::post('recuperaringreso/{id}', 'recuperar');
         
@@ -67,12 +61,7 @@ Route::middleware(['onlyadmin'])->group(function () {
         Route::patch('actualizarunidad/{id}', 'editarunidad');
         
     });
-    Route::controller(EmpresaController::class)->group(function () {
-        Route::post('nuevaempresa', 'crearempresa');
-        Route::get('verempresa', 'verempresa');
-        Route::patch('actualizarempresa/{id}', 'editarempresa');
-        
-    });
+   
     Route::controller(TipoEgresoController::class)->group(function () {
         Route::post('nuevotipo', 'creartipo');
         Route::get('vertipo', 'vertipo');
@@ -108,6 +97,21 @@ Route::middleware(['onlyadmin'])->group(function () {
 
 });
 
+Route::controller(EmpresaController::class)->group(function () {
+    Route::post('nuevaempresa', 'crearempresa');
+    Route::get('verempresa', 'verempresa');
+    Route::get('obtenerempresa/{id}', 'obtenerEmpresaPorId');
+    Route::patch('actualizarempresa/{id}', 'editarempresa');
+    
+});
+Route::controller(IngresoController::class)->group(function () {
+    Route::post('nuevoingreso', 'create');
+    Route::get('veringreso', 'veringreso');
+    Route::patch('actualizaringreso/{id}', 'update');
+    Route::post('archivaringreso/{id}', 'archivar');
+    
+});
+
 //Ruta privadas hacia el gerente
 Route::middleware(['onlygerente'])->group(function () {
     Route::controller(AuthGerenteController::class)->group(function () {
@@ -115,10 +119,7 @@ Route::middleware(['onlygerente'])->group(function () {
         Route::get('profilegerente', 'userProfileGerente');
         Route::put('updateinfogerente', 'updateGerente');
     });
-    Route::controller(IngresoController::class)->group(function () {
-        Route::post('nuevoingreso', 'create');
-        Route::get('veringreso', 'veringreso');        
-    });
+
 
     Route::controller(EgresoController::class)->group(function () {
         Route::post('nuevoegreso', 'crearegreso');
@@ -136,10 +137,10 @@ Route::middleware(['onlyfinanzas'])->group(function () {
         Route::put('updateinfofinanzas', 'updateFinanzas');
     });
 
-    Route::controller(IngresoController::class)->group(function () {
-        Route::post('nuevoingreso', 'create');
-        Route::get('veringreso', 'veringreso');        
-    });
+    // Route::controller(IngresoController::class)->group(function () {
+    //     Route::post('nuevoingreso', 'create');
+    //     Route::get('veringreso', 'veringreso');        
+    // });
 
     Route::controller(EgresoController::class)->group(function () {
         Route::post('nuevoegreso', 'crearegreso');
@@ -151,4 +152,3 @@ Route::middleware(['onlyfinanzas'])->group(function () {
 });
 //Rutas publicas
 Route::post('login', [AuthController::class, 'login']);
-

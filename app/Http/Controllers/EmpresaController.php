@@ -41,6 +41,8 @@ class EmpresaController extends Controller
     public function editarempresa(Request $request, $id){
         //**Validación de id */
         $empresas=Empresa::find($id);
+
+
         if(!$empresas){
             return response ()-> json(['error'=>'Empresa no encontrada'],404);
         }
@@ -51,4 +53,20 @@ class EmpresaController extends Controller
 
         
     }
+
+    public function obtenerEmpresaPorId($id)
+{
+    // Usando el método find()
+    $empresa = Empresa::find($id);
+
+    // Usando el método findOrFail(), lanzará una excepción si no se encuentra la empresa
+    // $empresa = Empresa::findOrFail($id);
+
+    if (!$empresa) {
+        return response()->json(['message' => 'Empresa no encontrada'], 404);
+    }
+
+    return response()->json($empresa);
+}
+
 }
