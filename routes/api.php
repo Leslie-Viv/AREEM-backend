@@ -41,33 +41,7 @@ Route::middleware(['onlyadmin'])->group(function () {
 
     });
     
-    Route::controller(ArchivarIngresoController::class)->group(function () {
-            Route::post('recuperaringreso/{id}', 'recuperar');
-        
-    });
 
-
-    Route::controller(ProductoController::class)->group(function () {
-        Route::post('nuevoproducto', 'crearproducto');
-        Route::get('verproducto', 'verproducto');
-        Route::patch('actualizarproducto/{id}', 'editarproducto');
-        Route::delete('eliminarproducto/{id}', 'eliminarproducto');
-        
-    });
-
-    Route::controller(UnidadNegocioController::class)->group(function () {
-        Route::post('nuevaunidad', 'crearunidad');
-        Route::get('verunidad', 'verunidad');
-        Route::patch('actualizarunidad/{id}', 'editarunidad');
-        
-    });
-   
-    Route::controller(TipoEgresoController::class)->group(function () {
-        Route::post('nuevotipo', 'creartipo');
-        Route::get('vertipo', 'vertipo');
-        Route::patch('actualizartipo/{id}', 'editartipo');
-        
-    });
 
     Route::controller(EgresoController::class)->group(function () {
         Route::post('nuevoegreso', 'crearegreso');
@@ -80,21 +54,30 @@ Route::middleware(['onlyadmin'])->group(function () {
             Route::post('recuperaregreso/{id}', 'recuperaregreso');
         
     });
-    Route::controller(OrigenEgresoController::class)->group(function () {
-        Route::post('nuevoorigen', 'crearorigen');
-        Route::get('verorigen', 'verorigen');
-        Route::patch('actualizarorigen/{id}', 'editarorigen');
-        
-    });
+    
 
     
 
+});
 
+Route::controller(ArchivarIngresoController::class)->group(function () {
+    Route::get('verarchivadosi', 'getAllArchivadosI');
+    Route::post('recuperaringreso/{id}', 'recuperar');
 
+});
 
+Route::controller(OrigenEgresoController::class)->group(function () {
+    Route::post('nuevoorigen', 'crearorigen');
+    Route::get('verorigen', 'verorigen');
+    Route::patch('actualizarorigen/{id}', 'editarorigen');
     
-    
+});
 
+Route::controller(TipoEgresoController::class)->group(function () {
+    Route::post('nuevotipo', 'creartipo');
+    Route::get('vertipo', 'vertipo');
+    Route::patch('actualizartipo/{id}', 'editartipo');
+    
 });
 
 Route::controller(EmpresaController::class)->group(function () {
@@ -109,6 +92,13 @@ Route::controller(IngresoController::class)->group(function () {
     Route::get('veringreso', 'veringreso');
     Route::patch('actualizaringreso/{id}', 'update');
     Route::post('archivaringreso/{id}', 'archivar');
+    
+});
+Route::controller(ProductoController::class)->group(function () {
+    Route::post('nuevoproducto', 'crearproducto');
+    Route::get('verproducto', 'verproducto');
+    Route::patch('actualizarproducto/{id}', 'editarproducto');
+    Route::delete('eliminarproducto/{id}', 'eliminarproducto');
     
 });
 
@@ -129,6 +119,14 @@ Route::middleware(['onlygerente'])->group(function () {
 
 
 });
+
+Route::controller(UnidadNegocioController::class)->group(function () {
+    Route::post('nuevaunidad', 'crearunidad');
+    Route::get('verunidad', 'verunidad');
+    Route::patch('actualizarunidad/{id}', 'editarunidad');
+    
+});
+
 //Ruta privadas hacia finanzas 
 Route::middleware(['onlyfinanzas'])->group(function () {
     Route::controller(AuthFinanzasController::class)->group(function () {

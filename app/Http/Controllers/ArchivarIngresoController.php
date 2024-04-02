@@ -36,6 +36,13 @@ class ArchivarIngresoController extends Controller
         
     }
 
+     //**Ver archivados*/
+
+     public function getAllArchivadosI () {
+        $archivar_ingresos= ArchivarIngreso::all();
+        return response()-> json($archivar_ingresos);
+    }
+
     
     //
 }
