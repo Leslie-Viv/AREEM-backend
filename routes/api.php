@@ -41,8 +41,6 @@ Route::middleware(['onlyadmin'])->group(function () {
 
     });
     
-
-
     Route::controller(EgresoController::class)->group(function () {
         Route::post('nuevoegreso', 'crearegreso');
         Route::get('veregreso', 'veregreso');
@@ -51,6 +49,14 @@ Route::middleware(['onlyadmin'])->group(function () {
         
     });    
 
+});
+
+Route::controller(EmpresaController::class)->group(function () {
+    Route::post('nuevaempresa', 'crearempresa');
+    Route::get('verempresa', 'verempresa');
+    Route::get('obtenerempresa/{id}', 'obtenerEmpresaPorId');
+    Route::patch('actualizarempresa/{id}', 'editarempresa');
+    
 });
 
 Route::controller(ArchivarEgresoController::class)->group(function () {
@@ -79,13 +85,7 @@ Route::controller(TipoEgresoController::class)->group(function () {
     
 });
 
-Route::controller(EmpresaController::class)->group(function () {
-    Route::post('nuevaempresa', 'crearempresa');
-    Route::get('verempresa', 'verempresa');
-    Route::get('obtenerempresa/{id}', 'obtenerEmpresaPorId');
-    Route::patch('actualizarempresa/{id}', 'editarempresa');
-    
-});
+
 Route::controller(IngresoController::class)->group(function () {
     Route::post('nuevoingreso', 'create');
     Route::get('veringreso', 'veringreso');

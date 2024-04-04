@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('tipo_egresos', function (Blueprint $table) {
             $table->id();
-            $table->string('tipoegreso');
+            $table->string('N1');
+            $table->string('N2');
+            $table->string('N3');
+            $table->string('N4');
+            $table->string('N5');
             $table->string('descripcionegreso');
             $table->string('gasto');
             $table->timestamps();

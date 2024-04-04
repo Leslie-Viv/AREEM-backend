@@ -23,7 +23,11 @@ class EgresoController extends Controller
             'anomesdereporte'=> 'required',
             'origenegreso'=> 'required | string',
             'tipodecuenta'=> 'required | string',
-            'tipoegreso'=> 'required | string',
+            'N1'=> 'required | string',
+            'N2'=> 'required | string',
+            'N3'=> 'required | string',
+            'N4'=> 'required | string',
+            'N5'=> 'required | string',
             'descripcionegreso'=> 'required | string',
             'gasto'=> 'required | string', 
             'nombreunidad'=> 'required | string',
@@ -71,7 +75,11 @@ class EgresoController extends Controller
         $archivar_egresos->anomesdereporte= $egreso->anomesdereporte;
         $archivar_egresos->origenegreso= $egreso->origenegreso;
         $archivar_egresos->tipodecuenta= $egreso->tipodecuenta;
-        $archivar_egresos->tipoegreso= $egreso->tipoegreso;
+        $archivar_egresos->N1= $egreso->N1;
+        $archivar_egresos->N2= $egreso->N2;
+        $archivar_egresos->N3= $egreso->N3;
+        $archivar_egresos->N4= $egreso->N4;
+        $archivar_egresos->N5= $egreso->N5;
         $archivar_egresos->descripcionegreso= $egreso->descripcionegreso;
         $archivar_egresos->gasto= $egreso->gasto;
         $archivar_egresos->nombreunidad= $egreso->nombreunidad;

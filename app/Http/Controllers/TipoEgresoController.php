@@ -21,7 +21,11 @@ class TipoEgresoController extends Controller
      //**Crear tipo */
      public function creartipo(Request $request) {
         $validator= Validator::make($request->all(),[
-            'tipoegreso'=> 'required | string',
+            'N1'=> 'required | string',
+            'N2'=> 'required | string',
+            'N3'=> 'required | string',
+            'N4'=> 'required | string',
+            'N5'=> 'required | string',
             'descripcionegreso'=> 'required | string',
             'gasto'=> 'required | string',
         ]);

@@ -23,7 +23,11 @@ class ArchivarEgresoController extends Controller
         $egreso->anomesdereporte= $archivar_egresos->anomesdereporte;
         $egreso->origenegreso= $archivar_egresos->origenegreso;
         $egreso->tipodecuenta= $archivar_egresos->tipodecuenta;
-        $egreso->tipoegreso= $archivar_egresos->tipoegreso;
+        $egreso->N1= $archivar_egresos->N1;
+        $egreso->N2= $archivar_egresos->N2;
+        $egreso->N3= $archivar_egresos->N3;
+        $egreso->N4= $archivar_egresos->N4;
+        $egreso->N5= $archivar_egresos->N5;
         $egreso->descripcionegreso= $archivar_egresos->descripcionegreso;
         $egreso->gasto= $archivar_egresos->gasto;
         $egreso->nombreunidad= $archivar_egresos->nombreunidad;

@@ -18,7 +18,11 @@ return new class extends Migration
             $table->date('anomesdereporte');
             $table->string('origenegreso');
             $table->string('tipodecuenta');
-            $table->string('tipoegreso');
+            $table->string('N1');
+            $table->string('N2');
+            $table->string('N3');
+            $table->string('N4');
+            $table->string('N5');
             $table->string('descripcionegreso');
             $table->string('gasto');
             $table->string('nombreunidad');

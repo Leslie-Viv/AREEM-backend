@@ -10,7 +10,11 @@ class TipoEgreso extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tipoegreso',
+        'N1',
+        'N2',
+        'N3',
+        'N4',
+        'N5',
         'descripcionegreso',
         'gasto'
     ];
