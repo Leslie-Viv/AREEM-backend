@@ -27,6 +27,9 @@ class Egreso extends Model
         'montototal',
         'user_id'
     ];
+
+    protected $dates = ['anomesdereporte'];
+    
     public function user(){
         return $this->belongsTo(User::class);
     }

@@ -37,19 +37,10 @@ Route::middleware(['onlyadmin'])->group(function () {
         Route::post('nuevousuario', 'createUser');
         Route::get('verusuarios', 'getAllUsers');
         Route::patch('actualizarusuario/{id}', 'updateUser');
-
-
     });
-    
-    Route::controller(EgresoController::class)->group(function () {
-        Route::post('nuevoegreso', 'crearegreso');
-        Route::get('veregreso', 'veregreso');
-        Route::patch('actualizaregreso/{id}', 'editaregreso');
-        Route::post('archivaregreso/{id}', 'archivaregreso');
-        
-    });    
 
 });
+
 
 Route::controller(EmpresaController::class)->group(function () {
     Route::post('nuevaempresa', 'crearempresa');
@@ -58,6 +49,14 @@ Route::controller(EmpresaController::class)->group(function () {
     Route::patch('actualizarempresa/{id}', 'editarempresa');
     
 });
+
+Route::controller(EgresoController::class)->group(function () {
+    Route::post('nuevoegreso', 'crearegreso');
+    Route::get('veregreso', 'veregreso');
+    Route::patch('actualizaregreso/{id}', 'editaregreso');
+    Route::post('archivaregreso/{id}', 'archivaregreso');
+    
+});    
 
 Route::controller(ArchivarEgresoController::class)->group(function () {
     Route::get('verarchivadose', 'getAllArchivadosE');
@@ -110,13 +109,6 @@ Route::middleware(['onlygerente'])->group(function () {
     });
 
 
-    Route::controller(EgresoController::class)->group(function () {
-        Route::post('nuevoegreso', 'crearegreso');
-        Route::get('veregreso', 'veregreso');
-        
-    });
-
-
 });
 
 Route::controller(UnidadNegocioController::class)->group(function () {
@@ -139,11 +131,6 @@ Route::middleware(['onlyfinanzas'])->group(function () {
     //     Route::get('veringreso', 'veringreso');        
     // });
 
-    Route::controller(EgresoController::class)->group(function () {
-        Route::post('nuevoegreso', 'crearegreso');
-        Route::get('veregreso', 'veregreso');
-        
-    });
     
 
 });
