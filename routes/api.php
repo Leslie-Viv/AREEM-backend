@@ -97,6 +97,14 @@ Route::controller(ProductoController::class)->group(function () {
     Route::get('verproducto', 'verproducto');
     Route::patch('actualizarproducto/{id}', 'editarproducto');
     Route::delete('eliminarproducto/{id}', 'eliminarproducto');
+    Route::get('obtenerproducto/{id}', 'obtenerProductoPorId');
+    
+});
+Route::controller(UnidadNegocioController::class)->group(function () {
+    Route::post('nuevaunidad', 'crearunidad');
+    Route::get('verunidad', 'verunidad');
+    Route::patch('actualizarunidad/{id}', 'editarunidad');
+    Route::get('obtenerunidad/{id}', 'obtenerUnidadPorId');
     
 });
 
@@ -111,12 +119,7 @@ Route::middleware(['onlygerente'])->group(function () {
 
 });
 
-Route::controller(UnidadNegocioController::class)->group(function () {
-    Route::post('nuevaunidad', 'crearunidad');
-    Route::get('verunidad', 'verunidad');
-    Route::patch('actualizarunidad/{id}', 'editarunidad');
-    
-});
+
 
 //Ruta privadas hacia finanzas 
 Route::middleware(['onlyfinanzas'])->group(function () {

@@ -50,6 +50,18 @@ class UnidadNegocioController extends Controller
 
         
     }
+
+    public function obtenerUnidadPorId($id)
+    {
+        // Usando el método find()
+        $unidad_negocios = UnidadNegocio::find($id);
+    
+        if (!$unidad_negocios) {
+            return response()->json(['message' => 'Unidad de negocio no encontrada'], 404);
+        }
+    
+        return response()->json($unidad_negocios);
+    }
     
 
 

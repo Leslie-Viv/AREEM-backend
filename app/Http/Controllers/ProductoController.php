@@ -61,6 +61,18 @@ class ProductoController extends Controller
         $producto->delete();
         return response()->json(['message' => 'Producto eliminado exitosamente'], 200);
     }
+
+    public function obtenerProductoPorId($id)
+    {
+        // Usando el método find()
+        $producto = Producto::find($id);
+    
+        if (!$producto) {
+            return response()->json(['message' => 'Producto no encontrado'], 404);
+        }
+    
+        return response()->json($producto);
+    }
     
 
 }
