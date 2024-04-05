@@ -66,41 +66,73 @@ class AuthAdminController extends Controller
         return response()->json(['user' => $user], 200);
     }
 
-    //**'rol_id'= this. */
-public function createUser(Request $request)
+    public function createUser(Request $request)
 {
-    // Validar los datos de la solicitud
+    if (!Auth::check()) {
+        return response()->json(['error' => 'No tienes acceso'], 401);
+    }
+
     $validator = Validator::make($request->all(), [
         'nombreempresa' => 'required|string',
         'nombrecompleto' => 'required|string',
         'email' => 'required|string|email|unique:users,email',
         'password' => 'required|string|min:8',
-        'rol_id' => 'required|exists:roles,id' // Asegúrate de tener una tabla roles con los roles predefinidos
+        'rol_id' => 'required|exists:roles,id' // Requerir contraseña en la creación
     ]);
 
     if ($validator->fails()) {
         return response()->json(['errors' => $validator->errors()], 422);
     }
 
-    // Crear el nuevo usuario
-    $user = User::create([
-        'nombreempresa' => $request->nombreempresa,
-        'nombrecompleto' => $request->nombrecompleto,
-        'email' => $request->email,
-        'password' => bcrypt($request->password),
-        'rol_id' => $request->rol_id,
-    ]);
+    $user = new User(); // Crear una nueva instancia de User
 
-    // Asignar el rol al usuario
-    $role = Role::find($request->rol_id);
-    if (!$role) {
-        return response()->json(['error' => 'El rol especificado no existe'], 404);
-    }
+    $user->nombreempresa = $request->nombreempresa;
+    $user->nombrecompleto = $request->nombrecompleto;
+    $user->email = $request->email;
+    $user->password = bcrypt($request->password);
+    $user->rol_id = $request->rol_id;
 
-    $user->roles()->attach($role);
+    $user->save(); // Guardar el nuevo usuario en la base de datos
 
-    return response()->json(['user' => $user], 201);
+    return response()->json(['user' => $user], 201); // 201 Created response
 }
+
+
+    //**'rol_id'= this. */
+// public function createUser(Request $request)
+// {
+//     // Validar los datos de la solicitud
+//     $validator = Validator::make($request->all(), [
+//         'nombreempresa' => 'required|string',
+//         'nombrecompleto' => 'required|string',
+//         'email' => 'required|string|email|unique:users,email',
+//         'password' => 'required|string|min:8',
+//         'rol_id' => 'required|exists:roles,id' // Asegúrate de tener una tabla roles con los roles predefinidos
+//     ]);
+
+//     if ($validator->fails()) {
+//         return response()->json(['errors' => $validator->errors()], 422);
+//     }
+
+//     // Crear el nuevo usuario
+//     $user = User::create([
+//         'nombreempresa' => $request->nombreempresa,
+//         'nombrecompleto' => $request->nombrecompleto,
+//         'email' => $request->email,
+//         'password' => bcrypt($request->password),
+//         'rol_id' => $request->rol_id,
+//     ]);
+
+//     // Asignar el rol al usuario
+//     $role = Role::find($request->rol_id);
+//     if (!$role) {
+//         return response()->json(['error' => 'El rol especificado no existe'], 404);
+//     }
+
+//     $user->roles()->attach($role);
+
+//     return response()->json(['user' => $user], 201);
+// }
 
 
     public function getAllUsers(){
