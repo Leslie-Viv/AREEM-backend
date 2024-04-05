@@ -97,4 +97,17 @@ class EgresoController extends Controller
         
     }
 
+    
+    public function obtenerEgresoPorId($id)
+    {
+        // Usando el método find()
+        $egreso = Egreso::find($id);
+    
+        if (!$egreso) {
+            return response()->json(['message' => 'Egreso no encontrado'], 404);
+        }
+    
+        return response()->json($egreso);
+    }
+
 }

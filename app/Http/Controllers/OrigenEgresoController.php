@@ -52,4 +52,16 @@ class OrigenEgresoController extends Controller
 
         
     }
+
+    public function obtenerOrigenPorId($id)
+    {
+        // Usando el método find()
+        $origen_egresos = OrigenEgreso::find($id);
+    
+        if (!$origen_egresos) {
+            return response()->json(['message' => 'Origen de egreso no encontrado'], 404);
+        }
+    
+        return response()->json($origen_egresos);
+    }
 }

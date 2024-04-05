@@ -67,8 +67,7 @@ class AuthAdminController extends Controller
     }
 
     //**'rol_id'= this. */
-
-    public function createUser(Request $request)
+public function createUser(Request $request)
 {
     // Validar los datos de la solicitud
     $validator = Validator::make($request->all(), [
@@ -90,7 +89,6 @@ class AuthAdminController extends Controller
         'email' => $request->email,
         'password' => bcrypt($request->password),
         'rol_id' => $request->rol_id,
-
     ]);
 
     // Asignar el rol al usuario
@@ -103,6 +101,7 @@ class AuthAdminController extends Controller
 
     return response()->json(['user' => $user], 201);
 }
+
 
     public function getAllUsers(){
     $users = User::all();

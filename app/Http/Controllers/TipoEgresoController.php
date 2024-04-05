@@ -58,5 +58,18 @@ class TipoEgresoController extends Controller
         
     }
 
+    
+    public function obtenerTipoPorId($id)
+    {
+        // Usando el método find()
+        $tipo_egresos = TipoEgreso::find($id);
+    
+        if (!$tipo_egresos) {
+            return response()->json(['message' => 'Tipo de egreso no encontrado'], 404);
+        }
+    
+        return response()->json($tipo_egresos);
+    }
+
 
 }

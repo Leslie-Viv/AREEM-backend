@@ -99,5 +99,17 @@ class IngresoController extends Controller
         
     }
 
+    public function obtenerIngresoPorId($id)
+    {
+        // Usando el método find()
+        $ingreso = Ingreso::find($id);
+    
+        if (!$ingreso) {
+            return response()->json(['message' => 'Ingreso no encontrado'], 404);
+        }
+    
+        return response()->json($ingreso);
+    }
+
     
 }
