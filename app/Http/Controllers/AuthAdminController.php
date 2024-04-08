@@ -75,8 +75,8 @@ class AuthAdminController extends Controller
     $validator = Validator::make($request->all(), [
         'nombreempresa' => 'required|string',
         'nombrecompleto' => 'required|string',
-        'email' => 'required|string|email|unique:users,email',
-        'password' => 'required|string|min:8',
+        'email' => 'required|string|email',
+        'password' => 'required|string',
         'rol_id' => 'required|exists:roles,id' // Requerir contraseña en la creación
     ]);
 
@@ -141,6 +141,17 @@ class AuthAdminController extends Controller
     return response()->json(['users' => $users], 200);
 }
 
+public function getUserById($id) {
+    $user = User::find($id);
+
+    if (!$user) {
+        return response()->json(['error' => 'Usuario no encontrado'], 404);
+    }
+
+    return response()->json(['user' => $user], 200);
+}
+
+
 public function updateUser(Request $request, $id)
 {
     // Buscar el usuario por su ID
@@ -173,6 +184,19 @@ public function updateUser(Request $request, $id)
     $user->save();
 
     return response()->json(['user' => $user], 200);
+}
+
+public function checkEmailAvailability($email)
+{
+    $user = User::where('email', $email)->first();
+
+    // Si $user no es nulo, significa que ya existe un usuario con ese correo electrónico
+    if ($user) {
+        return response()->json(['available' => false]);
+    }
+
+    // Si no se encontró ningún usuario con ese correo electrónico, entonces está disponible
+    return response()->json(['available' => true]);
 }
 
 

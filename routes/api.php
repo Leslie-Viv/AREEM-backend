@@ -35,8 +35,10 @@ Route::middleware(['onlyadmin'])->group(function () {
         Route::get('profileadmin', 'userProfileAdmin');
         Route::put('updateinfoadmin', 'updateAdmin');
         Route::get('verusuarios', 'getAllUsers');
+        Route::get('obtenerusuario/{id}', 'getUserById');
         Route::post('nuevousuario', 'createUser');
         Route::patch('actualizarusuario/{id}', 'updateUser');
+        Route::get('/check-email/{email}','checkEmailAvailability');
     });
 
 });
